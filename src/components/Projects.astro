@@ -1,0 +1,145 @@
+---
+// Screenshot Machine API configuration
+const generateScreenshotUrl = (url: string, options: Record<string, string> = {}): string => {
+  const customerKey = "c6faf4";
+  const secretPhrase = "";
+  
+  const defaultOptions = {
+    url: url,
+    dimension: "1366x768",
+    device: "desktop",
+    format: "png",
+    cacheLimit: "0",
+    delay: "200",
+    zoom: "100"
+  };
+  
+  const finalOptions = { ...defaultOptions, ...options };
+  const params = new URLSearchParams(finalOptions);
+  params.append("key", customerKey);
+  
+  return `https://api.screenshotmachine.com/?${params.toString()}`;
+};
+
+// Dynamic project configuration with live screenshot URLs
+const projects = [
+  {
+    id: 'sukisu',
+    name: 'Sukisu.org',
+    description: 'Next-Generation Android Root Solution with advanced kernel-based root management for Android devices.',
+    tags: ['VitePress', 'TypeScript', 'Vue.js'],
+    tagColors: ['green', 'blue', 'green-600'],
+    liveUrl: 'https://sukisu.org',
+    githubUrl: 'https://github.com/sukisu-ultra/website',
+    imageUrl: generateScreenshotUrl('https://sukisu.org'),
+    status: 'Live'
+  },
+  {
+    id: 'portfolio',
+    name: 'Personal Portfolio',
+    description: 'A modern, responsive portfolio website built with Astro and Tailwind CSS. Features smooth animations and a clean, professional design.',
+    tags: ['Astro', 'TypeScript', 'Tailwind'],
+    tagColors: ['orange', 'blue', 'cyan'],
+    liveUrl: '#',
+    githubUrl: '#',
+    imageUrl: generateScreenshotUrl('YOUR_DOMAIN_HERE'), // Replace YOUR_DOMAIN_HERE with your actual domain
+    status: 'Live',
+    isCurrentSite: true
+  }
+];
+---
+
+<section id="projects" class="py-20 bg-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          Featured Projects
+        </span>
+      </h2>
+      <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+        A showcase of my recent work and passion projects
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+      {projects.map((project) => (
+        <div class="bg-slate-900 rounded-xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 group border border-slate-700 max-w-md mx-auto">
+          <!-- Terminal-like header -->
+          <div class="flex items-center justify-between px-4 py-3 bg-slate-800 border-b border-slate-700">
+            <div class="flex items-center space-x-2">
+              <div class="flex space-x-2">
+                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <span class="text-slate-400 text-sm ml-2">{project.id}</span>
+            </div>
+            <span class="bg-green-500 text-white px-2 py-1 rounded-full text-xs">{project.status}</span>
+          </div>
+          
+          <div class="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
+            <img 
+              src={project.imageUrl} 
+              alt={`${project.name} website screenshot`} 
+              class="w-full h-full object-cover"
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+            />
+            <!-- Fallback placeholder -->
+            <div class="absolute inset-0 flex items-center justify-center" style="display: none;">
+              <div class="text-2xl font-bold text-white">{project.name.split(' ')[0].toUpperCase()}</div>
+            </div>
+          </div>
+          
+          <div class="p-5">
+            <h3 class="text-lg font-bold text-white mb-2">{project.name}</h3>
+            <p class="text-slate-300 mb-4 text-sm leading-relaxed">
+              {project.description}
+            </p>
+            
+            <div class="flex flex-wrap gap-2 mb-4">
+              {project.tags.map((tag, index) => {
+                const colorClass = project.tagColors[index];
+                return (
+                  <span class={`bg-${colorClass}-500/20 text-${colorClass}-300 px-2 py-1 rounded text-xs border border-${colorClass}-500/30`}>
+                    {tag}
+                  </span>
+                );
+              })}
+            </div>
+            
+            <div class="flex gap-3">
+              {project.isCurrentSite ? (
+                <button 
+                  class="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white text-center py-2 rounded-full text-sm font-medium"
+                >
+                  You're Here!
+                </button>
+              ) : (
+                <>
+                  <a 
+                    href={project.liveUrl} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-center py-2 rounded-full text-sm font-medium hover:from-blue-600 hover:to-purple-700 transition-all"
+                  >
+                    View Live
+                  </a>
+                  <a 
+                    href={project.githubUrl} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex-1 border border-slate-600 text-slate-300 text-center py-2 rounded-full text-sm font-medium hover:bg-slate-700 transition-all"
+                  >
+                    GitHub
+                  </a>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
