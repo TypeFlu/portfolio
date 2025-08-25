@@ -56,7 +56,7 @@ export default function Portfolio() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="font-bold text-xl font-mono bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              typeflu
+              TypeFlu
             </div>
             <div className="hidden md:flex space-x-8">
               {["About", "Skills", "Contact"].map((item) => (
@@ -230,7 +230,7 @@ export default function Portfolio() {
                 <Icon icon="mdi:email" className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform" />
                 <div className="text-left">
                   <div className="text-sm opacity-80">Email</div>
-                  <div className="font-mono">typeflu@gmail.com</div>
+                  <div className="font-mono">TypeFlu@gmail.com</div>
                 </div>
               </Button>
               <Button
@@ -242,7 +242,7 @@ export default function Portfolio() {
                 <Icon icon="mdi:telegram" className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform text-primary" />
                 <div className="text-left">
                   <div className="text-sm opacity-80">Telegram</div>
-                  <div className="font-mono">@typeflu</div>
+                  <div className="font-mono">@TypeFlu</div>
                 </div>
               </Button>
               <Button
@@ -254,7 +254,7 @@ export default function Portfolio() {
                 <Icon icon="mdi:github" className="mr-3 h-6 w-6 group-hover:scale-110 transition-transform text-accent" />
                 <div className="text-left">
                   <div className="text-sm opacity-80">GitHub</div>
-                  <div className="font-mono">@typeflu</div>
+                  <div className="font-mono">@TypeFlu</div>
                 </div>
               </Button>
             </div>
