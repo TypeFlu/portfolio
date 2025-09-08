@@ -9,11 +9,8 @@
     "start": "next start"
   },
   "dependencies": {
-    "@heroui/avatar": "^2.2.21",
-    "@heroui/system": "^2.4.21",
-    "@heroui/theme": "^2.4.21",
     "@hookform/resolvers": "^5.2.1",
-    "@iconify/react": "latest",
+    "@iconify/react": "^6.0.1",
     "@radix-ui/react-accordion": "1.2.12",
     "@radix-ui/react-alert-dialog": "1.1.15",
     "@radix-ui/react-aspect-ratio": "1.1.7",
