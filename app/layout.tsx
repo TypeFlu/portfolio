@@ -1,27 +1,45 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Playfair_Display, Source_Sans_3 as Source_Sans_Pro } from "next/font/google"
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 import "./globals.css"
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-playfair",
-  weight: ["400", "700"],
-})
-
-const sourceSans = Source_Sans_Pro({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-source-sans",
-  weight: ["400", "600"],
-})
+import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata: Metadata = {
-  title: "Saksham Singla - Full Stack Developer",
-  description:
-    "Modern developer portfolio showcasing expertise in TypeScript, React, Next.js, Vue.js, Astro, Rust, Go, and more.",
-  generator: "v0.app",
+  metadataBase: new URL(process.env.NODE_ENV === 'production' ? 'https://saksham.typeflu.me' : 'http://localhost:3000'),
+  title: "Saksham Singla (TypeFlu) - Full Stack Developer",
+  description: "My Portfolio Powered By Vercel And Next.js",
+  keywords: ["TypeScript", "React", "Next.js", "Vue.js", "Rust", "Go", "Full Stack Developer", "Web Development", "TypeFlu"],
+  authors: [{ name: "Saksham Singla", url: "https://github.com/typeflu" }],
+  creator: "Saksham Singla",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://saksham.typeflu.me",
+    title: "Saksham Singla (TypeFlu) - Full Stack Web Developer",
+    description: "My Portfolio Powered By Vercel And Next.js",
+    siteName: "TypeFlu Portfolio",
+    images: [
+      {
+        url: "/avatar.png",
+        width: 400,
+        height: 400,
+        alt: "Saksham Singla - TypeFlu"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Saksham Singla (TypeFlu) - Full Stack Web Developer",
+    description: "My Portfolio Powered By Vercel And Next.js",
+    images: ["/avatar.png"]
+  },
+  icons: {
+    icon: "/avatar.png",
+    shortcut: "/avatar.png",
+    apple: "/avatar.png"
+  },
+  manifest: "/manifest.json"
 }
 
 export default function RootLayout({
@@ -30,8 +48,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${sourceSans.variable} antialiased`}>
-      <body className="font-sans">{children}</body>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} antialiased`} suppressHydrationWarning>
+      <body className="font-sans">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
