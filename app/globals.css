@@ -4,6 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Design System Colors */
+  --ds-blue-600: #1e40af;
+  --ds-blue-300: #93c5fd;
+
   /* Updated to modern 2025 color palette with electric blue and cyber green accents */
   --background: oklch(0.98 0.005 240);
   --foreground: oklch(0.15 0.02 240);
@@ -115,7 +119,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
   /* Updated to use Geist fonts properly */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, 'SF Mono', Consolas, monospace;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Consolas, monospace;
   --font-serif: var(--font-geist-sans), ui-serif, Georgia, serif;
 }
 
@@ -129,24 +133,41 @@
 
   /* Enhanced grid background with dynamic animations */
   .grid-bg {
-    background-image: 
+    background-image:
       linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
       radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
       radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
-    background-size: 60px 60px, 60px 60px, 100% 100%, 100% 100%;
+    background-size:
+      60px 60px,
+      60px 60px,
+      100% 100%,
+      100% 100%;
     animation: grid-flow 25s ease-in-out infinite;
   }
 
   @keyframes grid-flow {
-    0%, 100% {
-      background-position: 0 0, 0 0, 0% 0%, 100% 100%;
+    0%,
+    100% {
+      background-position:
+        0 0,
+        0 0,
+        0% 0%,
+        100% 100%;
     }
     33% {
-      background-position: 20px 20px, 20px 20px, 50% 25%, 75% 50%;
+      background-position:
+        20px 20px,
+        20px 20px,
+        50% 25%,
+        75% 50%;
     }
     66% {
-      background-position: 40px 40px, 40px 40px, 100% 100%, 0% 0%;
+      background-position:
+        40px 40px,
+        40px 40px,
+        100% 100%,
+        0% 0%;
     }
   }
 
@@ -275,7 +296,8 @@
   }
 
   @keyframes bounce-subtle {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px);
     }
     50% {
@@ -284,7 +306,8 @@
   }
 
   @keyframes gradient-shift {
-    0%, 100% {
+    0%,
+    100% {
       background-position: 0% 50%;
     }
     50% {
@@ -293,7 +316,8 @@
   }
 
   @keyframes pulse-glow {
-    0%, 100% {
+    0%,
+    100% {
       box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
       transform: scale(1);
     }
@@ -334,7 +358,7 @@
   }
 
   .avatar-glow::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: -4px;
     background: linear-gradient(45deg, var(--primary), var(--accent), var(--primary));
@@ -372,41 +396,214 @@
   .hover-lift:hover {
     transform: translateY(-4px);
   }
-}  @keyframes gradient-shift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+}
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Performance optimizations */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* GPU acceleration for animated elements */
+.animate-fade-in,
+.animate-slide-up,
+.animate-bounce {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Optimize heavy elements */
+[data-aos],
+[data-gsap] {
+  will-change: transform, opacity;
+}
+
+/* Optimize animations */
+.animate-on-scroll {
+  will-change: transform, opacity;
+}
+
+.transition-all {
+  transition-property: transform, opacity, background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Geist Typography System */
+.geist-text {
+  font-family:
+    var(--font-geist-sans),
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
+}
+
+.geist-mono {
+  font-family:
+    var(--font-geist-mono), "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+    "Courier New", monospace;
+}
+
+/* Geist Display Typography */
+.geist-display-1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.geist-display-2 {
+  font-size: 3rem;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.geist-display-3 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Geist Heading Typography */
+.geist-h1 {
+  font-size: 2rem;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.geist-h2 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+.geist-h3 {
+  font-size: 1.25rem;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.geist-h4 {
+  font-size: 1.125rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+/* Geist Body Typography */
+.geist-body {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.geist-body-large {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.geist-body-small {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+/* Geist Caption Typography */
+.geist-caption {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--muted-foreground);
+}
+
+/* Geist Code Typography */
+.geist-code {
+  font-family:
+    var(--font-geist-mono), "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+    "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  background: var(--muted);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+}
+
+/* Responsive Geist Typography */
+@media (max-width: 768px) {
+  .geist-display-1 {
+    font-size: 2.5rem;
   }
 
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100%);
-    }
+  .geist-display-2 {
+    font-size: 2rem;
   }
 
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
-    }
+  .geist-display-3 {
+    font-size: 1.75rem;
   }
 
-  @keyframes text-shimmer {
-    0% {
-      background-position: -200% center;
-    }
-    100% {
-      background-position: 200% center;
-    }
+  .geist-h1 {
+    font-size: 1.75rem;
   }
+
+  .geist-h2 {
+    font-size: 1.375rem;
+  }
+}
